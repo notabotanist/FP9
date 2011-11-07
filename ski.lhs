@@ -40,10 +40,9 @@ Church booleans:
 (b)
 
 > data Atom = S | K | I | Var String 
-> {-machine instructions-} | IF 
+> {-machine instructions-} | IF | TRUE | FALSE
 >                          | ALT | LTE | AGT | GTE | AEQ | NEQ
 >                          | PLUS | MINUS | TIMES | DIV | MOD
->                          | TRUE | FALSE
 >                          | NUM Integer deriving Eq
 
 > instance Show Atom where
@@ -98,6 +97,11 @@ Church booleans:
 >   sk (Call (Name I) x)                   = x
 >   sk (Call (Call (Name K) x) y)          = x
 >   sk (Call (Call (Call (Name S) x) y) z) = Call (Call x z) (Call y z)
+>   sk (Call (Call (Name PLUS) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x+y)
+>   sk (Call (Call (Name MINUS) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x-y)
+>   sk (Call (Call (Name TIMES) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x*y)
+>   sk (Call (Call (Name DIV) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x`div`y)
+>   sk (Call (Call (Name MOD) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x`mod`y)
 >   sk (Call x y)                          = Call (sk x) (sk y)
 >   sk x                                   = error ("cannot sk: "++(show x))
 
