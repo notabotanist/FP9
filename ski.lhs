@@ -61,6 +61,7 @@ Church booleans:
 >   showsPrec _ DIV     = ("/" ++)
 >   showsPrec _ MOD     = ("%" ++)
 >   showsPrec _ TIMES   = ("*" ++)
+>   showsPrec _ IF      = ("if" ++)
 >   showsPrec _ TRUE    = ("true" ++)
 >   showsPrec _ FALSE   = ("false" ++)
 >   showsPrec _ (NUM i) = shows i
