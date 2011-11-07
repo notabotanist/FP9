@@ -108,6 +108,8 @@ Church booleans:
 >   sk (Call (Call (Name GTE) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x >= y)
 >   sk (Call (Call (Name AEQ) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x == y)
 >   sk (Call (Call (Name NEQ) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x /= y)
+>   sk (Call (Call (Call (Name IF) (Name TRUE)) _then) _) = _then
+>   sk (Call (Call (Call (Name IF) (Name FALSE)) _) _else) = _else
 >   sk (Call x y)                          = Call (sk x) (sk y)
 >   sk x                                   = error ("cannot sk: "++(show x))
 
