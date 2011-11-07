@@ -102,8 +102,18 @@ Church booleans:
 >   sk (Call (Call (Name TIMES) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x*y)
 >   sk (Call (Call (Name DIV) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x`div`y)
 >   sk (Call (Call (Name MOD) (Name (NUM x))) (Name (NUM y))) = Name (NUM $x`mod`y)
+>   sk (Call (Call (Name ALT) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x < y)
+>   sk (Call (Call (Name LTE) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x <= y)
+>   sk (Call (Call (Name AGT) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x > y)
+>   sk (Call (Call (Name GTE) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x >= y)
+>   sk (Call (Call (Name AEQ) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x == y)
+>   sk (Call (Call (Name NEQ) (Name (NUM x))) (Name (NUM y))) = boolToAtom (x /= y)
 >   sk (Call x y)                          = Call (sk x) (sk y)
 >   sk x                                   = error ("cannot sk: "++(show x))
+
+> boolToAtom :: Bool -> SExpr Atom
+> boolToAtom True  = Name TRUE
+> boolToAtom False = Name FALSE
 
 > a = execute (compile (Call (Proc "x" (x)) (Name "a")))
 > d_ss = execute ss
