@@ -39,13 +39,32 @@ Church booleans:
 
 (b)
 
-> data Atom = S | K | I | Var String deriving Eq
+> data Atom = S | K | I | Var String 
+> {-machine instructions-} | IF 
+>                          | ALT | LTE | AGT | GTE | AEQ | NEQ
+>                          | PLUS | MINUS | TIMES | DIV | MOD
+>                          | TRUE | FALSE
+>                          | NUM Integer deriving Eq
 
 > instance Show Atom where
 >   showsPrec _ I       = ("i" ++)
 >   showsPrec _ K       = ("k" ++)
 >   showsPrec _ S       = ("s" ++)
 >   showsPrec _ (Var v) = (v ++)
+>   showsPrec _ ALT     = ("<" ++)
+>   showsPrec _ LTE     = ("<=" ++)
+>   showsPrec _ AGT     = (">" ++)
+>   showsPrec _ GTE     = (">=" ++)
+>   showsPrec _ AEQ     = ("=" ++)
+>   showsPrec _ NEQ     = ("!=" ++)
+>   showsPrec _ PLUS    = ("+" ++)
+>   showsPrec _ MINUS   = ("-" ++)
+>   showsPrec _ DIV     = ("/" ++)
+>   showsPrec _ MOD     = ("%" ++)
+>   showsPrec _ TIMES   = ("*" ++)
+>   showsPrec _ TRUE    = ("true" ++)
+>   showsPrec _ FALSE   = ("false" ++)
+>   showsPrec _ (NUM i) = shows i
 
 > ss = Call (Name S) (Name (Var "s"))
 
