@@ -1,0 +1,20 @@
+Assignment 9
+
+Matt MacEwan
+Kevin Hart
+
+--
+
+The Parsing.lhs file is unmodified but included due to dependencies by other
+modules.
+
+The SKI.lhs file contains the SKI parser, extended with the required additional
+"machine instructions" for things like if, then, else, and arithmetic and
+comparition operations. Additionally, part (f) at the bottom of the file lists
+required examples of these additiont.
+
+The ML.lhs file contains a parser which has been extended to produce SExpr
+results, rather than just accepting or rejecting the language.
+
+The Main.lhs file is very short and simply accepts a string and glues together
+the other parsers to produce a result.
