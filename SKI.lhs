@@ -60,24 +60,24 @@ Church booleans:
 
 (c)
 
-> compile :: SExpr String -> SExpr Atom
-> compile (Name n)   = Name (Var n)
+> compile :: SExpr Atom -> SExpr Atom
+> compile n@(Name _) = n
 > compile (Call f a) = Call (compile f) (compile a)
 > compile (Proc p e) = abstract (compile e) where
 >   abstract :: SExpr Atom -> SExpr Atom                  -- without Proc
 >   abstract (Call f a) =                                 -- (lambda (p) (f a)) -> S f a
 >     Call (Call (Name S) (abstract f)) (abstract a)      --   by rule 6 in the paper
->   abstract n@(Name (Var v)) | p == v = Name I           -- (lambda (v) v) -> I
+>   abstract n@(Name v) | p == v = Name I           -- (lambda (v) v) -> I
 >   abstract n@(Name _)                = Call (Name K) n  -- (lambda (p) n) -> K n
 
-> i = compile (Proc "x" (x))
-> c_b = compile a_b
-> c_y = compile a_y
-> c_if' = compile if'
-> c_true = compile true
-> c_false = compile false
-> c_this = compile b_this
-> c_that = compile b_that
+ i = compile (Proc "x" (x))
+ c_b = compile a_b
+ c_y = compile a_y
+ c_if' = compile if'
+ c_true = compile true
+ c_false = compile false
+ c_this = compile b_this
+ c_that = compile b_that
 
 (d)
 
@@ -108,16 +108,16 @@ Church booleans:
 > boolToAtom True  = Name TRUE
 > boolToAtom False = Name FALSE
 
-> a = execute (compile (Call (Proc "x" (x)) (Name "a")))
-> d_ss = execute ss
-> d_i = execute i
-> d_b = execute c_b
-> d_y = execute c_y
-> d_if' = execute c_if'
-> d_true = execute c_true
-> d_false = execute c_false
-> d_this = execute c_this
-> d_that = execute c_that
+ a = execute (compile (Call (Proc "x" (x)) (Name "a")))
+ d_ss = execute ss
+ d_i = execute i
+ d_b = execute c_b
+ d_y = execute c_y
+ d_if' = execute c_if'
+ d_true = execute c_true
+ d_false = execute c_false
+ d_this = execute c_this
+ d_that = execute c_that
 
 (e)
 
