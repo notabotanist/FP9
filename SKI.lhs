@@ -186,3 +186,53 @@ recursion:
 > factorial = Call ycomb r
 
 Call (Call repeat (Call factorial (Call (Call product n2) n2))) hello
+
+(f)
+
+examples for machine instructions
+
+> ex_ift = (Call (Call (Call (Name IF) (Name TRUE))  (Name (Var "this"))) (Name (Var "that")))
+> ex_iff = (Call (Call (Call (Name IF) (Name FALSE))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_ift = this
+    execute ex_iff = that
+
+> ex_pmt = (Call (Call (Name PLUS) (Call (Call (Name TIMES) (Name (NUM 6))) (Name (NUM 2)))) (Call (Call (Name MINUS) (Name (NUM 5))) (Name (NUM 7))))
+
+    execute ex_pmt = 14
+
+> ex_mul = (Call (Call (Name TIMES) (Name (NUM 12))) (Name (NUM 12)))
+
+    execute ex_mul = 144
+
+> ex_div = (Call (Call (Name DIV) (Name (NUM 6))) (Name (NUM 12)))
+
+    execute ex_div = 2
+
+> ex_mod = (Call (Call (Name MOD) (Name (NUM 5))) (Name (NUM 12)))
+
+    execute ex_mod = 2
+  
+> ex_lt = (Call (Call (Call (Name IF) (Call (Call (Name ALT) (Name (NUM 6))) (Name (NUM 5))))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_lt = this
+
+> ex_gt = (Call (Call (Call (Name IF) (Call (Call (Name AGT) (Name (NUM 6))) (Name (NUM 5))))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_gt = that
+    
+> ex_lte = (Call (Call (Call (Name IF) (Call (Call (Name LTE) (Name (NUM 6))) (Name (NUM 5))))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_lte = this
+
+> ex_gte = (Call (Call (Call (Name IF) (Call (Call (Name GTE) (Name (NUM 6))) (Name (NUM 5))))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_gte = that
+
+> ex_eq = (Call (Call (Call (Name IF) (Call (Call (Name AEQ) (Name (NUM 6))) (Name (NUM 5))))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_eq = that
+
+> ex_neq = (Call (Call (Call (Name IF) (Call (Call (Name NEQ) (Name (NUM 6))) (Name (NUM 5))))  (Name (Var "this"))) (Name (Var "that")))
+
+    execute ex_neq = this
